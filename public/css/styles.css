@@ -1,0 +1,7 @@
+@font-face { font-family: Avenir; src: url('../fonts/Avenir-Medium.ttf'); }
+@font-face { font-family: AvenirBlack; src: url('../fonts/AvenirBlack.otf'); } 
+@font-face { font-family: Futura; src: url('../fonts/Futura.ttf'); } 
+
+body {
+    margin: 0;
+}

@@ -1,0 +1,16 @@
+site/
+    question-id/
+        upvotes: int
+        speaker: string
+        text: string
+        
+requests/
+    question-id/
+        speaker: string (dropdown)
+        text: string
+        contact: string
+        
+
+functions: 
+    - make a new question (user)
+    - approve a question (admin)
