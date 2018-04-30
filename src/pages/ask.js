@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import PropTypes from 'prop-types';
 import $ from 'jquery';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import AppBar from 'material-ui/AppBar';
 import firebase from '../components/firebase.js';
+import history from '../components/history.js';
 
 
 class Ask extends Component {
-    
-    constructor() {
-        super();
-    }
             
 	askQuestion(speaker, question, contact, callback) {
 		var requests = firebase.database().ref('requests/');
@@ -22,11 +15,11 @@ class Ask extends Component {
         firebase.database().ref('requests/' + requestKey).set({
             speaker: speaker,
             text: question,
-            contact : contact
+            contact : contact,
+            visible: false
         }, callback);        
 	}
     
-    // TODO: take in based on a form
     buttonRequest = () => {
         this.askQuestion(
             $("#speakerSelect").val(),
@@ -34,6 +27,8 @@ class Ask extends Component {
             "sohampardeshi@gmail.com",
             function() {
                 $("#questionInput").val("");
+                $('#speakerSelect').prop('selectedIndex',0);
+                history.push(`/thank`);
             }
         );
     }
@@ -41,7 +36,6 @@ class Ask extends Component {
 	render() {
 		return (
 
-			<MuiThemeProvider muiTheme={muiTheme}>
                 <div className={css(styles.background)}>
                     <div className={css(styles.popup)}>
                         <div className={css(styles.topbar)}>
@@ -76,7 +70,6 @@ class Ask extends Component {
                         </div>
                     </div>
                 </div>
-			</MuiThemeProvider>
 
 		);
 	}
@@ -144,16 +137,6 @@ const styles = StyleSheet.create({
     speakerSelect: {
         float: 'right',
     }
-});
-
-
-const muiTheme = getMuiTheme({
-    palette: {
-        textColor: '#fff'
-    },
-    appBar: {
-        color: 'rgba(230, 43, 37)',
-    },
 });
 
 export default Ask;
