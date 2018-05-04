@@ -254,6 +254,8 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: '16px',
         
+         WebkitBackfaceVisibility: 'hidden',
+        
         ':active' : {
             background: 'rgba(230, 43, 37, 0.8)'
         }
