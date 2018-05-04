@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, css } from 'aphrodite';
 
-import Question from '../components/question.js';
+import Question from '../components/admin-q.js';
 import firebase from '../components/firebase.js';
 import { Grid } from 'react-bootstrap';
 
@@ -48,6 +47,7 @@ class Admin extends Component {
                         speaker={question.speaker}
                         text={question.text}
                         contact={question.contact}
+                        admin={false}
                       />);
         }
         

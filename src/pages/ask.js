@@ -7,28 +7,36 @@ import history from '../components/history.js';
 
 
 class Ask extends Component {
-            
-	askQuestion(speaker, question, contact, callback) {
-		var requests = firebase.database().ref('requests/');
-        var requestKey = requests.push().key;
+          
+    constructor(props) {
+        super(props);
+        
+        let hash = window.location.hash.split('/');
+        let speaker = hash[2] || 'general';
+        console.log(speaker);
+        this.state = {
+            speaker: speaker
+        };
+    }
+    
+	askQuestion(speaker, question, callback) {
+		let requests = firebase.database().ref('requests/');
+        let requestKey = requests.push().key;
         console.log("Generating Request Key: " + requestKey);
         firebase.database().ref('requests/' + requestKey).set({
             speaker: speaker,
             text: question,
-            contact : contact,
             visible: false
         }, callback);        
 	}
     
     buttonRequest = () => {
         this.askQuestion(
-            $("#speakerSelect").val(),
+            this.state.speaker,
             $("#questionInput").val(),
-            "sohampardeshi@gmail.com",
-            function() {
+            () => {
                 $("#questionInput").val("");
-                $('#speakerSelect').prop('selectedIndex',0);
-                history.push(`/thank`);
+                history.push(`/thank/` + this.state.speaker);
             }
         );
     }
@@ -39,18 +47,11 @@ class Ask extends Component {
                 <div className={css(styles.background)}>
                     <div className={css(styles.popup)}>
                         <div className={css(styles.topbar)}>
-                            <button className={css(styles.x)}>X</button>
+                            <button className={css(styles.x)} onClick={() => history.goBack()}>X</button>
                         </div>
                         <div className={css(styles.container)}>
                             <div>
                                 <b>What would you like to know?</b> Write a question for the speaker below. 
-                                
-                                <select id="speakerSelect" className={css(styles.speakerSelect)}>
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
-                                </select>
                             </div>
                             <div className={css(styles.inputContainer)}>
                                  <textarea 
@@ -109,14 +110,14 @@ const styles = StyleSheet.create({
     },
     container: {
         height: '90%',
-        width: '80%',
+        width: '100%',
         padding: '10%'
     },
     inputContainer : {
         marginTop: '20px',
     },
     input: {
-        width: '90%',
+        width: '100%',
         background: '#f5f5f5',
         border: 'none',
         padding: '5%'

@@ -12,7 +12,7 @@ class Thank extends Component {
                 <div className={css(styles.background)}>
                     <div className={css(styles.popup)}>
                         <div className={css(styles.topbar)}>
-                            <button className={css(styles.x)} onClick={() => history.goBack()}>
+                            <button className={css(styles.x)} onClick={() => history.go(-2)}>
                                 X
                             </button>
                         </div>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     },
     container: {
         height: '90%',
-        width: '65%',
+        width: '100%',
         padding: '20%'
     },
     thanks: {

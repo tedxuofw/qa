@@ -8,6 +8,7 @@ requests/
 site/
     [question-id]/
         upvotes: int
+        answer: string
         
 speakers/
     speaker-id/

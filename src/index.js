@@ -7,6 +7,7 @@ import history from './components/history'
 import Ask from './pages/ask.js';
 import Thank from './pages/thank.js';
 import Admin from './pages/admin.js';
+import Questions from './pages/questions.js';
 
 
 class App extends React.Component {
@@ -15,9 +16,10 @@ class App extends React.Component {
 		return (
 			<Router history={history}>
 				<Switch> 
-					<Route exact path='/ask' component={Ask}/>
-                    <Route exact path='/thank' component={Thank}/>
-                    <Route exact path='/tedadmin2' component={Admin}/>
+					<Route path='/ask' component={Ask}/>
+                    <Route path='/thank' component={Thank}/>
+                    <Route path='/tedadmin2' component={Admin}/>
+                    <Route path='/questions' component={Questions}/>
                 </Switch>
 			</Router>
         );
