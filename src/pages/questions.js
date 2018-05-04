@@ -24,6 +24,9 @@ class Questions extends Component {
             speaker: speaker,
             questions: {},
             open: false,
+            name: "",
+            talk: "",
+            image: "./resources/generic.png"
         };
         
         this.openMenu = this.openMenu.bind(this);
@@ -32,13 +35,15 @@ class Questions extends Component {
     
 	openMenu() {
 		this.setState({ open: true });
-	};
+	}
 
 	closeMenu() {
 		this.setState({ open: false });
-	};
+    }
     
     componentDidMount() {
+        this.updateHeader();
+        
         const siteRef = firebase.database().ref('site/');
         const postsRef = firebase.database().ref('requests/');
         siteRef.on('value', (site) => {
@@ -60,6 +65,24 @@ class Questions extends Component {
                 });
             });
         });
+    }
+    
+    updateHeader = () => {
+        const speakerRef = firebase.database().ref('speakers/');
+        let speaker = speakerRef.child(this.state.speaker);
+        speaker.once('value').then((snapshot) => {
+            let data = snapshot.val();
+            
+            this.setState({
+                speaker: this.state.speaker,
+                questions: this.state.questions,
+                open: this.state.open,
+                name: data.name,
+                talk: data.talk,
+                image: ("./resources/" + data.image)
+            });
+        });
+
     }
     
     addQuestion = (key, data) => {
@@ -90,7 +113,8 @@ class Questions extends Component {
                       
         if(rows.length === 0) {
             rows.push(
-                <center key={"key"}>
+                <center key="none">
+                    <br/><br/><br/>
                     <div>
                         No questions found!
                     </div>
@@ -122,22 +146,26 @@ class Questions extends Component {
                         onLeftIconButtonClick={this.openMenu}
                     />
             
-                    // Header
                     <div className={css(styles.header)}>
+                        <img className={css(styles.headerImg)} src={this.state.image} alt={this.state.speaker} />
+                        
+                        <div className={css(styles.title)}>
+                            {this.state.name}
+                        </div>
+                        <div className={css(styles.talk)}>
+                            {this.state.talk}
+                        </div>
                         
                     </div>
                     
-                    // Sorting order
                     <div className={css(styles.ordering)}>
-                        Sort Order:
+                        Sort Order: Most Recent
                     </div>
             
-                    // Show all posts
                     <div className={css(styles.background)}>
                         <Grid>{this.getPosts()}</Grid>
                     </div>
             
-                    // Question Button
                     <button className={css(styles.submit)} onClick={this.buttonRequest}>
                         Ask Me a Question
                     </button>            
@@ -156,7 +184,23 @@ const styles = StyleSheet.create({
         top: '64px',
         left: '0',
         right: '0',
-        height: '100px'
+        height: '100px',
+        padding: '20px',
+    },
+    headerImg: {
+        height: '60px',
+        width: '60px',
+        float: 'left',
+        marginRight: '20px'
+    },
+    title: {
+        fontSize: '18px',
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        marginTop: '5px',
+    },
+    talk: {
+        fontSize: '16px'
     },
     ordering: {
         background: "#e5e5e5",

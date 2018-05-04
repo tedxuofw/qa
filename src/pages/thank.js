@@ -20,7 +20,7 @@ class Thank extends Component {
                             <div className={css(styles.thanks)}>Thank you for your question!</div>
                             <br/>
                             <div>                                
-                                We will selecting questions of varying subjects and the speaker will write a response when they are available.
+                                Your question is pending moderator approval. Check back in a little bit and the speaker will write a response when they are available.
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     popup: {
         background: 'white',
         height: '60%',
-        marginTop: '30%',
+        marginTop: '25%',
         marginBottom: '20%',
         marginLeft: '10%',
         marginRight: '10%',
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     container: {
         height: '90%',
         width: '100%',
-        padding: '20%'
+        padding: '18%'
     },
     thanks: {
         fontSize: '26px',

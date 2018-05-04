@@ -59,7 +59,8 @@ class Ask extends Component {
                                     className={css(styles.input)}    
                                     type="text" 
                                     name="questionInput"
-                                    rows="14"
+                                    rows="10"
+                                    maxlength="350"
                                     placeholder="Ask a question...">
                                 </textarea>
                             </div>
