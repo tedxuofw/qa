@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import 'react-toggle/style.css';
 
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
 class Question extends Component {
      

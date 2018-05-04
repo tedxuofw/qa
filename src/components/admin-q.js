@@ -37,6 +37,29 @@ class Question extends Component {
         });
     }
     
+    // TODO: Delte the Answer Q from the Admin page
+    deleteQuestion = (answer) => {
+        if(window.confirm("Are you sure you want to delete this message?")) {
+            firebase.database().ref("requests/" + this.state.key).remove();
+            
+            if(this.state.visible){
+                firebase.database().ref("site/" + this.state.key).remove();
+            }
+        }
+    }
+    
+    answerQuestion = (answer) => {
+        if(this.state.visible) {
+            var response = prompt("Please answer the question:");
+            if (response != null && response !== "") {
+                const siteRef = firebase.database().ref("site");
+                siteRef.child(this.state.key).update({
+                    answer: response
+                });
+            }
+        }
+    }
+    
 	render() {
 		return (
             <Row className={css(styles.border)}>
@@ -49,12 +72,20 @@ class Question extends Component {
                     </div>
                 </Col>
                 <Col xs={3} md={3}>
-                    <div className={css(styles.vcenter)}>
+                    <span className={css(styles.vcenter)}>
                         <Toggle
                             id={this.props.id}
                             checked={this.state.visible}
                             onChange={this.toggle} />
-                    </div>
+                    </span>
+                    { this.state.visible &&
+                        <button onClick={this.answerQuestion}>
+                            Answer
+                        </button>
+                    }
+                    <button onClick={this.deleteQuestion}>
+                        Delete
+                    </button>
                 </Col>
             </Row>
         );
@@ -62,22 +93,34 @@ class Question extends Component {
 }
 
 const styles = StyleSheet.create({
-    border: {
-        borderRight: '1px solid black',
-        borderBottom: '1px solid black'
-    },
+    
     speaker: {
         fontSize: '12px',
         color: '#444'
+    },   
+    
+    border: {
+        paddingTop: '10px',
+        paddingBottom: '20px',
+    },
+    one: {
+        fontSize: '12px',
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        paddingBottom: '5px'
     },
     text: {
-        fontSize: '15px'
-    },    
-    vcenter: {
-        position: 'relative',
-        top: '50%',
-        transform: 'translateY(25%)'
+        fontSize: '16px',
+        fontFamily: 'Avenir'
+    },
+    answer: {
+        borderLeft: '8px rgba(230, 43, 37) solid',
+        marginLeft: '15px',
+        marginTop: '5px',
+        paddingLeft: '10px'
     }
 });
+
+
 
 export default Question;

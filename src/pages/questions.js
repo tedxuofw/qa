@@ -20,14 +20,16 @@ class Questions extends Component {
         super(props);
         
         let hash = window.location.hash.split('/');
-        let speaker = hash[2] || 'general';
+        let speaker = hash[1] || 'general';
+        
+        if(speaker !== "general" && !speakers[speaker]){
+            speaker = "general";
+        }
+        
         this.state = {
             speaker: speaker,
             questions: {},
-            open: false,
-            name: "",
-            talk: "",
-            image: "./resources/generic.jpg"
+            open: false
         };
         
         this.openMenu = this.openMenu.bind(this);
@@ -43,8 +45,6 @@ class Questions extends Component {
     }
     
     componentDidMount() {
-        this.updateHeader();
-        
         const siteRef = firebase.database().ref('site/');
         const postsRef = firebase.database().ref('requests/');
         siteRef.on('value', (site) => {
@@ -68,24 +68,36 @@ class Questions extends Component {
         });
     }
     
-    updateHeader = () => {
+    getHeader = () => {
         if(speakers[this.state.speaker]) {
             let data = speakers[this.state.speaker];
-            this.setState({
-                speaker: this.state.speaker,
-                questions: this.state.questions,
-                open: this.state.open,
-                name: data.name,
-                talk: data.talk,
-                image: "." + data.img 
-            });
+            
+            return(
+                <div className={css(styles.header)}>
+                    <img className={css(styles.headerImg)} src={"." + data.img} alt={data.name} />
+
+                    <div className={css(styles.title)}>
+                        {data.name}
+                    </div>
+                    <div className={css(styles.talk)}>
+                        {data.talk}
+                    </div>
+                </div>
+            );
+        } else if (this.state.speaker === "general") {
+            return (
+                <div className={css(styles.header)}>
+                    <img className={css(styles.headerImg)} src={"./resources/tedx.jpg"} alt="general"/>
+                    <div className={css(styles.title)}>
+                        General Questions?
+                    </div>               
+                    <div className={css(styles.talk)}>
+                        Need help? Ask the TEDxUofW team
+                    </div>
+                </div>
+            );
         }
         
-//        const speakerRef = firebase.database().ref('speakers/');
-//        let speaker = speakerRef.child(this.state.speaker);
-//        speaker.once('value').then((snapshot) => {
-//            let data = snapshot.val(); 
-//        });
     }
     
     addQuestion = (key, data) => {
@@ -149,17 +161,7 @@ class Questions extends Component {
                         onLeftIconButtonClick={this.openMenu}
                     />
             
-                    <div className={css(styles.header)}>
-                        <img className={css(styles.headerImg)} src={this.state.image} alt={this.state.speaker} />
-                        
-                        <div className={css(styles.title)}>
-                            {this.state.name}
-                        </div>
-                        <div className={css(styles.talk)}>
-                            {this.state.talk}
-                        </div>
-                        
-                    </div>
+                    {this.getHeader()}
                     
                     <div className={css(styles.ordering)}>
                         Sort Order: Most Recent

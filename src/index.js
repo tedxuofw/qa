@@ -16,10 +16,10 @@ class App extends React.Component {
 		return (
 			<Router history={history}>
 				<Switch> 
-					<Route path='/ask' component={Ask}/>
+					<Route default path='/ask' component={Ask}/>
                     <Route path='/thank' component={Thank}/>
                     <Route path='/tedadmin2' component={Admin}/>
-                    <Route path='/questions' component={Questions}/>
+                    <Route path='/' component={Questions}/>
                 </Switch>
 			</Router>
         );

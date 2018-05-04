@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import speakers from '../components/data.js';
+
 import Question from '../components/admin-q.js';
 import firebase from '../components/firebase.js';
 import { Grid } from 'react-bootstrap';
@@ -9,21 +11,29 @@ class Admin extends Component {
     
     constructor() {
         super();
+        
+        let hash = window.location.hash.split('/');
+        let speaker = hash[2];        
+        
         this.state = {
-            questions: {}
+            questions: {},
+            filtered: (speaker in speakers),
+            speaker: speaker
         }  
         
         this.addQuestion = this.addQuestion.bind(this);
     }
     
-    componentDidMount() {
+    componentDidMount() {        
         const requestsRef = firebase.database().ref('requests/');
         requestsRef.on('value', (requests) => {
             requests.forEach((question) => {
                 let key = question.key;
                 let childData = question.val();
                 
-                this.addQuestion(key, childData);
+                if(!this.state.filtered || childData.speaker === this.state.speaker) {
+                    this.addQuestion(key, childData);
+                }
             });
         });
     }
@@ -34,8 +44,6 @@ class Admin extends Component {
         this.setState({ questions: updated });
     }
 
-    
-    
 	render() {
         var rows = [];
         for(let key in this.state.questions) {
