@@ -4,6 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 import Question from '../components/user-q.js';
 import firebase from '../components/firebase.js';
 import history from '../components/history.js';
+import speakers from '../components/data.js';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -26,7 +27,7 @@ class Questions extends Component {
             open: false,
             name: "",
             talk: "",
-            image: "./resources/generic.png"
+            image: "./resources/generic.jpg"
         };
         
         this.openMenu = this.openMenu.bind(this);
@@ -68,21 +69,23 @@ class Questions extends Component {
     }
     
     updateHeader = () => {
-        const speakerRef = firebase.database().ref('speakers/');
-        let speaker = speakerRef.child(this.state.speaker);
-        speaker.once('value').then((snapshot) => {
-            let data = snapshot.val();
-            
+        if(speakers[this.state.speaker]) {
+            let data = speakers[this.state.speaker];
             this.setState({
                 speaker: this.state.speaker,
                 questions: this.state.questions,
                 open: this.state.open,
                 name: data.name,
                 talk: data.talk,
-                image: ("./resources/" + data.image)
+                image: "." + data.img 
             });
-        });
-
+        }
+        
+//        const speakerRef = firebase.database().ref('speakers/');
+//        let speaker = speakerRef.child(this.state.speaker);
+//        speaker.once('value').then((snapshot) => {
+//            let data = snapshot.val(); 
+//        });
     }
     
     addQuestion = (key, data) => {
