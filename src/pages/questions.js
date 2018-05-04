@@ -66,6 +66,11 @@ class Questions extends Component {
                 });
             });
         });
+        
+        siteRef.on("child_removed", (question) => {
+            let key = question.key;
+            this.removeQuestion(key);
+        });
     }
     
     getHeader = () => {
@@ -100,6 +105,14 @@ class Questions extends Component {
         
     }
     
+                        
+    removeQuestion = (key) => {
+        const updated = this.state.questions;
+        if(updated[key]) {
+            delete updated[key];
+            this.setState({ questions: updated });
+        }
+    }
     addQuestion = (key, data) => {
         const updated = this.state.questions;
         updated[key] = data;

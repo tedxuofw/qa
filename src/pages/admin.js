@@ -6,6 +6,10 @@ import Question from '../components/admin-q.js';
 import firebase from '../components/firebase.js';
 import { Grid } from 'react-bootstrap';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import AppBar from 'material-ui/AppBar';
+import TEDMenu from '../components/ted-menu.js';
 
 class Admin extends Component {
     
@@ -18,12 +22,22 @@ class Admin extends Component {
         this.state = {
             questions: {},
             filtered: (speaker in speakers),
-            speaker: speaker
+            speaker: speaker,
+            open: false
         }  
         
         this.addQuestion = this.addQuestion.bind(this);
+        this.openMenu = this.openMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
     }
     
+	openMenu() {
+		this.setState({ open: true });
+	}
+
+	closeMenu() {
+		this.setState({ open: false });
+    }
     componentDidMount() {        
         const requestsRef = firebase.database().ref('requests/');
         requestsRef.on('value', (requests) => {
@@ -36,6 +50,19 @@ class Admin extends Component {
                 }
             });
         });
+        
+        requestsRef.on("child_removed", (question) => {
+            let key = question.key;
+            this.removeQuestion(key);
+        });
+    }
+    
+    removeQuestion = (key) => {
+        const updated = this.state.questions;
+        if(updated[key]) {
+            delete updated[key];
+            this.setState({ questions: updated });
+        }
     }
     
     addQuestion = (key, data) => {
@@ -55,12 +82,48 @@ class Admin extends Component {
                         speaker={question.speaker}
                         text={question.text}
                         contact={question.contact}
-                        admin={false}
                       />);
         }
         
-        return <Grid>{rows}</Grid>;
+        return (    
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <div>
+                    <AppBar  
+                        title="TEDxUofW 2018" 
+                        titleStyle={{
+                            fontSize: '16px',
+                            fontWeight:'bold',
+                            textAlign: 'center'
+                        }}
+            
+                        style={{
+                            boxShadow: 'none'      
+                        }}            
+            
+                        iconClassNameRight="muidocs-icon-navigation-expand-more" 
+            
+                        onLeftIconButtonClick={this.openMenu}
+                    />
+            
+                    <Grid>{rows}</Grid>
+            
+                    <TEDMenu open={this.state.open} close={this.closeMenu} />
+                </div>
+			</MuiThemeProvider>
+		);
 	}
 }
+
+
+const muiTheme = getMuiTheme({
+    palette: {
+        textColor: '#fff'
+    },
+    appBar: {
+        color: 'rgba(230, 43, 37, 1)',
+    },
+});
+
+
 
 export default Admin;
