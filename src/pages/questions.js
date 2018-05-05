@@ -74,6 +74,7 @@ class Questions extends Component {
     }
     
     getHeader = () => {
+        console.log(this.state.speaker)
         if(speakers[this.state.speaker]) {
             let data = speakers[this.state.speaker];
             
@@ -215,14 +216,18 @@ const styles = StyleSheet.create({
         marginRight: '20px'
     },
     title: {
-        fontSize: '18px',
+        fontSize: '16px',
         textTransform: 'uppercase',
         fontWeight: 'bold',
         marginTop: '5px',
     },
     talk: {
+<<<<<<< HEAD
         fontSize: '14px',
         lineHeight: '97%'
+=======
+        fontSize: '14px'
+>>>>>>> 594954beefcf99501d8688ad8dc01b5db4e03f8b
     },
     ordering: {
         background: "#e5e5e5",

@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir'
     },
     answer: {
-        borderLeft: '8px rgba(230, 43, 37) solid',
+        borderLeft: '8px rgb(230, 43, 37) solid',
+        WebkitBackfaceVisibility: 'hidden',
         marginLeft: '15px',
         marginTop: '5px',
         paddingLeft: '10px'
