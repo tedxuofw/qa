@@ -94,10 +94,13 @@ class Questions extends Component {
                 <div className={css(styles.header)}>
                     <img className={css(styles.headerImg)} src={"./resources/tedx.jpg"} alt="general"/>
                     <div className={css(styles.title)}>
-                        General Questions?
+                        Questions?
                     </div>               
                     <div className={css(styles.talk)}>
-                        Need help? Ask the TEDxUofW team
+                        Need help? Ask us.
+                    </div>
+                    <div className={css(styles.talk)}>
+                        Talk to speakers <a href="http://live.tedxuofw.com/#/speakers">here</a>!
                     </div>
                 </div>
             );
@@ -218,7 +221,8 @@ const styles = StyleSheet.create({
         marginTop: '5px',
     },
     talk: {
-        fontSize: '16px'
+        fontSize: '14px',
+        lineHeight: '97%'
     },
     ordering: {
         background: "#e5e5e5",

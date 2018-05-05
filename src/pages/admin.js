@@ -72,7 +72,7 @@ class Admin extends Component {
     }
 
 	render() {
-        var rows = [];
+        let rows = [];
         for(let key in this.state.questions) {
             let question = this.state.questions[key];
             rows.push(<Question
