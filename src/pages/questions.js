@@ -248,16 +248,16 @@ const styles = StyleSheet.create({
         
         height: '45px',
         
-        background: 'rgba(230, 43, 37)',
+        background: 'rgb(230, 43, 37)',
         border: 'none',
         width: '100%',
         color: 'white',
         fontSize: '16px',
         
-         WebkitBackfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
         
         ':active' : {
-            background: 'rgba(230, 43, 37, 0.8)'
+            background: 'rgb(230, 43, 37)'
         }
     },    
 });
@@ -267,7 +267,7 @@ const muiTheme = getMuiTheme({
         textColor: '#fff'
     },
     appBar: {
-        color: 'rgba(230, 43, 37, 1)',
+        color: 'rgb(230, 43, 37)',
     },
 });
 

@@ -128,11 +128,13 @@ const styles = StyleSheet.create({
         height: '25px',
         background: 'none',
         color: 'rgba(230, 43, 37, 1)',
+        WebkitBackfaceVisibility: 'hidden',
         fontWeight: 'bold',
         border: 'none',
         
         ":active": {
-            color: 'rgba(230, 43, 37, 0.8)'
+            color: 'rgb(230, 43, 37)',
+            WebkitBackfaceVisibility: 'hidden',
         }
     },
     question: {
@@ -145,7 +147,8 @@ const styles = StyleSheet.create({
         width: '70px'
     },
     answerButton: {
-        background: 'rgba(230, 43, 37)',
+        background: 'rgb(230, 43, 37)',
+        WebkitBackfaceVisibility: 'hidden',
         border: 'none',
         color: 'white',
         fontSize: '12px',
@@ -156,7 +159,8 @@ const styles = StyleSheet.create({
         paddingRight: '10px',
         
         ':active' : {
-            background: 'rgba(230, 43, 37, 0.8)'
+            background: 'rgb(230, 43, 37)',
+            WebkitBackfaceVisibility: 'hidden',
         }  
     },
     text: {

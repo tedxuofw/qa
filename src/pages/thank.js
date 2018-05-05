@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
         marginRight: '10%',
     },
     topbar : {
-        background: 'rgba(230, 43, 37)',
+        background: 'rgb(230, 43, 37)',
+        WebkitBackfaceVisibility: 'hidden',
         height: '10%'
     },
     x:{

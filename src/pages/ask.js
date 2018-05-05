@@ -97,8 +97,9 @@ const styles = StyleSheet.create({
         marginRight: '10%',
     },
     topbar : {
-        background: 'rgba(230, 43, 37)',
-        height: '10%'
+        background: 'rgb(230, 43, 37)',
+        height: '10%',
+        WebkitBackfaceVisibility: 'hidden',
     },
     x:{
         float: 'right',
@@ -124,7 +125,8 @@ const styles = StyleSheet.create({
         padding: '5%'
     },
     submit: {
-        background: 'rgba(230, 43, 37)',
+        background: 'rgb(230, 43, 37)',
+        WebkitBackfaceVisibility: 'hidden',
         border: 'none',
         color: 'white',
         marginTop: '20px',
@@ -133,7 +135,8 @@ const styles = StyleSheet.create({
         fontSize: '16px',
         
         ':active' : {
-            background: 'rgba(230, 43, 37, 0.8)'
+            WebkitBackfaceVisibility: 'hidden',
+            background: 'rgb(230, 43, 37)'
         }
     },
     speakerSelect: {

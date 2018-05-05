@@ -120,7 +120,7 @@ const muiTheme = getMuiTheme({
         textColor: '#fff'
     },
     appBar: {
-        color: 'rgba(230, 43, 37, 1)',
+        color: 'rgb(230, 43, 37)',
     },
 });
 
