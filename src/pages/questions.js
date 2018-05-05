@@ -222,12 +222,8 @@ const styles = StyleSheet.create({
         marginTop: '5px',
     },
     talk: {
-<<<<<<< HEAD
         fontSize: '14px',
         lineHeight: '97%'
-=======
-        fontSize: '14px'
->>>>>>> 594954beefcf99501d8688ad8dc01b5db4e03f8b
     },
     ordering: {
         background: "#e5e5e5",
