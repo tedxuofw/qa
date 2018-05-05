@@ -31,14 +31,17 @@ class Ask extends Component {
 	}
     
     buttonRequest = () => {
-        this.askQuestion(
-            this.state.speaker,
-            $("#questionInput").val(),
-            () => {
-                $("#questionInput").val("");
-                history.push(`/thank/` + this.state.speaker);
-            }
-        );
+        let questionText = $("#questionInput").val();
+        if(questionText && questionText != "") {
+            this.askQuestion(
+                this.state.speaker,
+                questionText,
+                () => {
+                    $("#questionInput").val("");
+                    history.push(`/thank/` + this.state.speaker);
+                }
+            );
+        }
     }
     
 	render() {
@@ -59,8 +62,8 @@ class Ask extends Component {
                                     className={css(styles.input)}    
                                     type="text" 
                                     name="questionInput"
-                                    rows="10"
-                                    maxlength="350"
+                                    rows="9"
+                                    maxLength="350"
                                     placeholder="Ask a question...">
                                 </textarea>
                             </div>
@@ -91,10 +94,11 @@ const styles = StyleSheet.create({
     popup: {
         background: 'white',
         height: '80%',
-        marginTop: '15%',
-        marginBottom: '15%',
+        marginTop: '50px',
+        marginBottom: '50px',
         marginLeft: '10%',
         marginRight: '10%',
+        maxHeight: '475px',
     },
     topbar : {
         background: 'rgb(230, 43, 37)',
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
         padding: '10%'
     },
     inputContainer : {
-        marginTop: '20px',
+        marginTop: '15px',
     },
     input: {
         width: '100%',
@@ -129,7 +133,7 @@ const styles = StyleSheet.create({
         WebkitBackfaceVisibility: 'hidden',
         border: 'none',
         color: 'white',
-        marginTop: '20px',
+        marginTop: '15px',
         width: '100%',
         height: '40px',
         fontSize: '16px',

@@ -33,8 +33,6 @@ const styles = StyleSheet.create({
     background: {
         background: '#E5E5E5',
         position: 'absolute',
-        width: '100%',
-        height: '100%',
         left: '0',
         top: '0',
         bottom: '0',
@@ -42,9 +40,10 @@ const styles = StyleSheet.create({
     },
     popup: {
         background: 'white',
-        height: '60%',
-        marginTop: '25%',
-        marginBottom: '20%',
+        height: '75%',
+        marginTop: '50px',
+        marginBottom: '50px',
+        maxHeight: '450px',
         marginLeft: '10%',
         marginRight: '10%',
     },

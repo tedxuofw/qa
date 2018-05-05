@@ -20,7 +20,7 @@ class Questions extends Component {
         super(props);
         
         let hash = window.location.hash.split('/');
-        let speaker = hash[1] || 'general';
+        let speaker = hash[2] || 'general';
         
         if(speaker !== "general" && !speakers[speaker]){
             speaker = "general";
@@ -74,6 +74,7 @@ class Questions extends Component {
     }
     
     getHeader = () => {
+        console.log(this.state.speaker)
         if(speakers[this.state.speaker]) {
             let data = speakers[this.state.speaker];
             
@@ -94,10 +95,10 @@ class Questions extends Component {
                 <div className={css(styles.header)}>
                     <img className={css(styles.headerImg)} src={"./resources/tedx.jpg"} alt="general"/>
                     <div className={css(styles.title)}>
-                        General Questions?
+                        General
                     </div>               
                     <div className={css(styles.talk)}>
-                        Need help? Ask the TEDxUofW team
+                        Need help? Ask us!
                     </div>
                 </div>
             );
@@ -212,13 +213,13 @@ const styles = StyleSheet.create({
         marginRight: '20px'
     },
     title: {
-        fontSize: '18px',
+        fontSize: '16px',
         textTransform: 'uppercase',
         fontWeight: 'bold',
         marginTop: '5px',
     },
     talk: {
-        fontSize: '16px'
+        fontSize: '14px'
     },
     ordering: {
         background: "#e5e5e5",
