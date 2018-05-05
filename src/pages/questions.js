@@ -20,7 +20,7 @@ class Questions extends Component {
         super(props);
         
         let hash = window.location.hash.split('/');
-        let speaker = hash[2] || 'general';
+        let speaker = hash[1] || 'general';
         
         if(speaker !== "general" && !speakers[speaker]){
             speaker = "general";
